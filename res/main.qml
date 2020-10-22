@@ -1,27 +1,15 @@
-import QtQuick 2.6
-import QtQuick.Window 2.2
-import Snake.Direction 1.0
+import QtQuick 2.0
+import QtQuick.Controls 1.0
 
-Window {
-  visible: true
+ApplicationWindow
+{
+    visible: true
+    width: 640
+    height: 480
+    title: qsTr("Snake")
 
-  color: "#BECB02"
-
-  minimumWidth: game_board.width
-  minimumHeight: game_board.height
-
-  Item {
-    anchors.fill: parent
-
-    focus: true
-
-    Keys.onRightPressed: snake.set_direction(Direction.Right)
-    Keys.onLeftPressed: snake.set_direction(Direction.Left)
-    Keys.onUpPressed: snake.set_direction(Direction.Up)
-    Keys.onDownPressed: snake.set_direction(Direction.Down)
-
-    Board {
-      id: game_board
+    Text {
+        anchors.centerIn: parent
+        text: qsTr("Hello")
     }
-  }
 }
