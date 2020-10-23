@@ -14,7 +14,16 @@ set(CMAKE_AUTORCC ON)
 
 add_executable(snake
     src/main.cpp
+    src/board.cpp
+    src/engine.cpp
+    src/snake.cpp
+
     res/qml.qrc
+)
+
+target_include_directories(snake
+    PUBLIC
+        src/
 )
 
 target_link_libraries(snake
