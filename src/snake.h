@@ -19,21 +19,24 @@ public:
     snake(direction _direction);
 
     void move();
+    void eat();
 
     void push_front(const element& _element);
 
+
+    element tail() const;
+    element next_element() const;
     std::list<element> elements() const;
+
+    void set_direction(direction _direction);
 
 private:
     element head() const;
-    element tail() const;
 
     void push_back(const element& _element);
 
     void pop_front();
     void pop_back();
-
-    element next_element() const;
 
     direction m_direction;
     std::list<element> m_snake;

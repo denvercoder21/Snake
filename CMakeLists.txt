@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_compile_options(-Wall -Wextra -pedantic -Werror)
 
+find_package(Threads REQUIRED)
 find_package(Qt5 COMPONENTS Core Qml Quick REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
@@ -27,6 +28,7 @@ target_include_directories(snake
 )
 
 target_link_libraries(snake
+        Threads::Threads
         Qt5::Core
         Qt5::Qml
         Qt5::Quick

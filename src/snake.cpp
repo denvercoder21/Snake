@@ -7,11 +7,14 @@ snake::snake(snake::direction _direction) :
 
 void snake::move()
 {
-    auto next = next_element();
-
-    // order matters in case that the next element is our own tail
+    // order matters in case the next element is our own tail
     pop_back();
-    push_front(next);
+    push_front(next_element());
+}
+
+void snake::eat()
+{
+    push_front(next_element());
 }
 
 element snake::head() const
@@ -32,6 +35,26 @@ void snake::push_front(const element &_element)
 std::list<element> snake::elements() const
 {
     return m_snake;
+}
+
+void snake::set_direction(snake::direction _direction)
+{
+    if (_direction == m_direction)
+        return;
+
+    if (m_direction == direction::left && _direction == direction::right)
+        return;
+
+    if (m_direction == direction::right && _direction == direction::left)
+        return;
+
+    if (m_direction == direction::up && _direction == direction::down)
+        return;
+
+    if (m_direction == direction::down && _direction == direction::up)
+        return;
+
+    m_direction = _direction;
 }
 
 void snake::push_back(const element &_element)

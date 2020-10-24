@@ -9,6 +9,11 @@ struct element
         y;
 };
 
+inline bool operator==(const element& a, const element& b)
+{
+    return a.x == b.x && a.y == b.y;
+}
+
 // https://stackoverflow.com/questions/6942273/how-to-get-a-random-element-from-a-c-container
 template<typename Iter, typename RandomGenerator>
 Iter select_randomly(Iter start, Iter end, RandomGenerator& g) {
