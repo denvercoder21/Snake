@@ -1,4 +1,4 @@
-#include "engine.h"
+#include "game.h"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -11,8 +11,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine("qrc:/main.qml");
 
-    class engine game;
-    std::thread(std::bind(&engine::process, &game)).detach();
+    auto snake = game{};
 
     return app.exec();
 }

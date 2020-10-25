@@ -16,7 +16,7 @@ set(CMAKE_AUTORCC ON)
 add_executable(snake
     src/main.cpp
     src/board.cpp
-    src/engine.cpp
+    src/game.cpp
     src/snake.cpp
 
     res/qml.qrc

@@ -1,4 +1,4 @@
-#include "engine.h"
+#include "game.h"
 
 #include <algorithm>
 #include <iostream>
@@ -16,7 +16,7 @@ constexpr int board_height{13};
 
 } // namespace
 
-engine::engine() :
+game::game() :
     m_board(board_width, board_height),
     m_snake(snake::direction::down)
 {
@@ -30,11 +30,9 @@ engine::engine() :
         m_board.set_state(_element, board::element_state::snake);
 
     m_board.generate_fruit();
-
-    std::cout << m_board << "\n\n" << std::endl;
 }
 
-void engine::process()
+void game::process()
 {
     while (!m_quit)
     {
@@ -66,8 +64,5 @@ void engine::process()
             m_board.set_state(m_snake.tail(), board::element_state::empty);
             m_snake.move();
         }
-
-        std::cout << m_board << "\n\n" << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(2));
     }
 }

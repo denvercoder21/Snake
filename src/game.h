@@ -2,16 +2,19 @@
 
 #include "board.h"
 #include "snake.h"
-#include "utils.h"
 
-class engine
+class game
 {
 public:
-    engine();
+    game();
 
-    void process();
+    void start();
+    void restart();
+    void reset();
 
 private:
+
+    void process();
     board m_board;
     snake m_snake;
 
