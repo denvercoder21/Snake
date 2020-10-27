@@ -2,10 +2,6 @@
 
 #include <algorithm>
 #include <iostream>
-#include <iterator>
-
-#include <chrono>
-#include <thread>
 
 namespace
 {
@@ -16,7 +12,8 @@ constexpr int board_height{13};
 
 } // namespace
 
-game::game() :
+game::game(QObject* parent) :
+    QObject(parent),
     m_board(board_width, board_height),
     m_snake(snake::direction::down)
 {
@@ -27,9 +24,15 @@ game::game() :
 
     // set snake elements on the board
     for (const auto& _element : m_snake.elements())
-        m_board.set_state(_element, board::element_state::snake);
+        m_board.set_state(_element, board::cell::snake);
 
     m_board.generate_fruit();
+}
+
+void game::start() noexcept
+{
+    std::cout << "game started" << std::endl;
+//    process();
 }
 
 void game::process()
@@ -46,22 +49,23 @@ void game::process()
         }
 
         // collision with snake itself
-        auto snake = m_snake.elements();
+        const auto& snake = m_snake.elements();
         if (std::ranges::find(snake, next) != snake.end() && next != m_snake.tail())
         {
             m_quit = true;
             continue;
         }
 
-        m_board.set_state(next, board::element_state::snake);
-        if (m_board.state(next) == board::element_state::fruit)
+        // path is clear, move snake
+        m_board.set_state(next, board::cell::snake);
+        if (m_board.state(next) == board::cell::fruit)
         {
             m_snake.eat();
             m_board.generate_fruit();
         }
         else
         {
-            m_board.set_state(m_snake.tail(), board::element_state::empty);
+            m_board.set_state(m_snake.tail(), board::cell::empty);
             m_snake.move();
         }
     }

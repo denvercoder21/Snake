@@ -8,7 +8,7 @@
 class board
 {
 public:
-    enum class element_state
+    enum class cell
     {
         empty = 0,
         snake,
@@ -17,26 +17,27 @@ public:
 
     board(int width, int height);
 
-    element_state state(const element& _element) const;
-    void set_state(const element& _element, element_state state);
+    [[nodiscard]] cell state(const element& _element) const;
+    void set_state(const element& _element, cell state);
 
-    bool inside_bounds(const element& _element) const;
+    [[nodiscard]] bool inside_bounds(const element& _element) const;
 
     void generate_fruit();
+    void clear();
 
-    friend std::ostream& operator<<(std::ostream& str, board::element_state state)
+    friend std::ostream& operator<<(std::ostream& str, board::cell state)
     {
         switch (state)
         {
         [[likely]]
-        case board::element_state::empty:
+        case board::cell::empty:
             str << " - ";
             break;
-        case board::element_state::snake:
+        case board::cell::snake:
             str << " # ";
             break;
         [[unlikely]]
-        case board::element_state::fruit:
+        case board::cell::fruit:
             str << " o ";
             break;
         }
@@ -57,8 +58,8 @@ public:
 private:
     size_t element_to_index(const element& _element) const;
 
-    int m_width,
-        m_height;
+    const int m_width,
+              m_height;
 
-    std::vector<element_state> m_elements;
+    std::vector<cell> m_cells;
 };

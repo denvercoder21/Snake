@@ -17,6 +17,7 @@ add_executable(snake
     src/main.cpp
     src/board.cpp
     src/game.cpp
+    src/game_viewmodel.cpp
     src/snake.cpp
 
     res/qml.qrc

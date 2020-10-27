@@ -3,18 +3,19 @@
 #include "board.h"
 #include "snake.h"
 
-class game
-{
-public:
-    game();
+#include <QObject>
 
-    void start();
-    void restart();
-    void reset();
+class game : public QObject
+{
+    Q_OBJECT
+public:
+    explicit game(QObject *parent = nullptr);
+
+    Q_INVOKABLE void start() noexcept;
 
 private:
-
     void process();
+
     board m_board;
     snake m_snake;
 

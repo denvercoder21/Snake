@@ -8,10 +8,12 @@
 
 int main(int argc, char *argv[])
 {
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine("qrc:/main.qml");
 
-    auto snake = game{};
+    auto logic = game{};
 
     return app.exec();
 }

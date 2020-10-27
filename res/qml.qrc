@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>KeyboardKey.qml</file>
+        <file>WelcomeScreen.qml</file>
+        <file>HighscoreScreen.qml</file>
+        <file>GameOverScreen.qml</file>
     </qresource>
 </RCC>

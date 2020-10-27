@@ -1,33 +1,36 @@
 #include "board.h"
 
+#include <algorithm>
 #include <iostream>
 #include <ranges>
 
 board::board(int width, int height) :
     m_width(width),
     m_height(height),
-    m_elements(width * height, element_state::empty)
+    m_cells(width * height, cell::empty)
 {
 }
 
-board::element_state board::state(const element &_element) const
+board::cell board::state(const element &_element) const
 {
     try
     {
-        return m_elements.at(element_to_index(_element));
-    }  catch (const std::out_of_range& e)
+        return m_cells.at(element_to_index(_element));
+    }
+    catch (const std::out_of_range& e)
     {
         std::cout << e.what() << std::endl;
-        return element_state::empty;
+        return cell::empty;
     }
 }
 
-void board::set_state(const element& _element, board::element_state state)
+void board::set_state(const element& _element, board::cell state)
 {
     try
     {
-        m_elements.at(element_to_index(_element)) = state;
-    }  catch (const std::out_of_range& e)
+        m_cells.at(element_to_index(_element)) = state;
+    }
+    catch (const std::out_of_range& e)
     {
         std::cout << e.what() << std::endl;
     }
@@ -43,9 +46,17 @@ bool board::inside_bounds(const element &_element) const
 
 void board::generate_fruit()
 {
-    auto empty_cells = [](const element_state c){ return c == element_state::empty; };
-    auto rndm_empty = select_randomly(m_elements | std::views::filter(empty_cells));
-    *rndm_empty = element_state::fruit;
+    auto empty = [](const cell c){
+        return c == cell::empty;
+    };
+
+    auto rndm_empty = select_randomly(m_cells | std::views::filter(empty));
+    *rndm_empty = cell::fruit;
+}
+
+void board::clear()
+{
+    std::ranges::fill(m_cells, cell::empty);
 }
 
 size_t board::element_to_index(const element &_element) const

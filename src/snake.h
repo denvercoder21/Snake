@@ -3,7 +3,6 @@
 #include "utils.h"
 
 #include <list>
-#include <utility>
 
 class snake
 {
@@ -22,7 +21,6 @@ public:
     void eat();
 
     void push_front(const element& _element);
-
 
     element tail() const;
     element next_element() const;
