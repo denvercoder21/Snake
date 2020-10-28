@@ -12,24 +12,56 @@ ApplicationWindow
 
     color: "#BECB02"
 
-    WelcomeScreen {
-        id: welcomeScreen
+    Grid {
+        columns: BoardModel.columnCount()
+        spacing: 2
 
-        width: 450
-        height: 350
+        Repeater {
+            model: BoardModel.rowCount()
 
-        anchors.centerIn: parent
+            Rectangle {
+                width: 20
+                height: 20
+                color: getColor(BoardModel.data(BoardModel.index(index, index)))
+
+                Text {
+                    anchors.fill: parent
+                    text: BoardModel.data(BoardModel.index(index, index))
+                    font.pixelSize: 9
+                }
+            }
+        }
     }
 
-    Shortcut {
-        sequence: "Q"
-        context: Qt.ApplicationShortcut
-        onActivated: Qt.quit()
-    }
-
-    Shortcut {
-        sequence: "H"
-        context: Qt.ApplicationShortcut
-        onActivated: console.log("show highscore")
+    function getColor(index) {
+        if (index === "Empty")
+            return "gold"
+        if (index === BoardModel.Snake)
+            return "lightsteelblue"
+        if (index === BoardModel.Fruit)
+            return "red"
+        return "brown"
     }
 }
+
+//    WelcomeScreen {
+//        id: welcomeScreen
+
+//        width: 450
+//        height: 350
+
+//        anchors.centerIn: parent
+//    }
+
+//    Shortcut {
+//        sequence: "Q"
+//        context: Qt.ApplicationShortcut
+//        onActivated: Qt.quit()
+//    }
+
+//    Shortcut {
+//        sequence: "H"
+//        context: Qt.ApplicationShortcut
+//        onActivated: console.log("show highscore")
+//    }
+//}

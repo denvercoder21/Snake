@@ -16,6 +16,7 @@ set(CMAKE_AUTORCC ON)
 add_executable(snake
     src/main.cpp
     src/board.cpp
+    src/board_viewmodel.cpp
     src/game.cpp
     src/game_viewmodel.cpp
     src/snake.cpp

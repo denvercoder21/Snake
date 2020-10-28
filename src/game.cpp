@@ -1,24 +1,16 @@
 #include "game.h"
+#include "utils.h"
 
 #include <algorithm>
 #include <iostream>
 
-namespace
-{
-
-constexpr int number_snake_elements{6};
-constexpr int board_width{20};
-constexpr int board_height{13};
-
-} // namespace
-
-game::game(QObject* parent) :
+game::game(board& _board, snake& _snake, QObject* parent) :
     QObject(parent),
-    m_board(board_width, board_height),
-    m_snake(snake::direction::down)
+    m_board(_board),
+    m_snake(_snake)
 {
     // initialize snake
-    for (int i = 0; i < number_snake_elements; ++i)
+    for (int i = 0; i < definitions::number_snake_elements; ++i)
         m_snake.push_front({i+2, 1});
     m_snake.move();
 

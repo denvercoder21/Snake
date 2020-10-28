@@ -2,11 +2,14 @@
 
 #include "utils.h"
 
+#include <QObject>
+
 #include <iostream>
 #include <vector>
 
-class board
+class board : public QObject
 {
+    Q_OBJECT
 public:
     enum class cell
     {
@@ -15,15 +18,21 @@ public:
         fruit
     };
 
-    board(int width, int height);
+    board(int width, int height, QObject* parent = nullptr);
+
+    int width() const noexcept;
+    int height() const noexcept;
 
     [[nodiscard]] cell state(const element& _element) const;
+    [[nodiscard]] cell state(size_t index) const;
     void set_state(const element& _element, cell state);
 
     [[nodiscard]] bool inside_bounds(const element& _element) const;
 
     void generate_fruit();
     void clear();
+
+    size_t element_to_index(const element& _element) const;
 
     friend std::ostream& operator<<(std::ostream& str, board::cell state)
     {
@@ -55,9 +64,10 @@ public:
         return str;
     }
 
-private:
-    size_t element_to_index(const element& _element) const;
+signals:
+    void data_changed(const element&);
 
+private:
     const int m_width,
               m_height;
 

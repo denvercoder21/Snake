@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 
@@ -22,6 +23,8 @@ Rectangle {
             fill: root
             margins: 20
         }
+
+        spacing: 12
 
         Text {
             id: headline
@@ -52,158 +55,59 @@ Rectangle {
             color: "#777777"
         }
 
-        Rectangle {
-            id: body
+        Item {
+            id: dummy
 
             Layout.fillWidth: true
             Layout.fillHeight: true
+        }
 
-            ColumnLayout {
-                id: keyMapLayout
+        RoundButton {
+            id: startButton
 
-                anchors.fill: body
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
 
-                Rectangle {
-                    id: arrows
+            radius: 10
 
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
+            text: qsTr("Start Game")
 
-                    color: "blue"
-                }
+            onClicked: Game.start()
+        }
 
-                RowLayout {
-                    id: enterRow
+        RoundButton {
+            id: highscoreButton
 
-                    Item {
-                        id: enterKeyItemLeft
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
 
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
+            radius: 10
 
-                        KeyboardKey {
-                            id: enterKeyIcon
+            text: qsTr("Highscore")
+        }
 
-                            anchors.verticalCenter: enterKeyItemLeft.verticalCenter
+        RoundButton {
+            id: helpButton
 
-                            width: 50
-                            height: 25
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
 
-                            text: qsTr("↵ Enter")
-                            textPixelSize: 11
-                        }
-                    }
+            radius: 10
 
-                    Item {
-                        id: enterKeyItemRight
+            text: qsTr("Help")
+        }
 
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
+        RoundButton {
+            id: quitButton
 
-                        Text {
-                            anchors.fill: enterKeyItemRight
-                            verticalAlignment: Text.AlignVCenter
-                            text: qsTr("Start Game")
-                        }
-                    }
-                }
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
 
-                RowLayout {
-                    id: highscoreRow
+            radius: 10
 
-                    Item {
-                        id: highscoreKeyItemLeft
+            text: qsTr("Quit")
 
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-
-                        KeyboardKey {
-                            id: highscoreKeyIcon
-
-                            anchors.verticalCenter: highscoreKeyItemLeft.verticalCenter
-
-                            width: 25
-                            height: 25
-
-                            text: qsTr("H")
-                        }
-                    }
-
-                    Item {
-                        id: highscoreKeyItemRight
-
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-
-                        Text {
-                            anchors.fill: highscoreKeyItemRight
-                            verticalAlignment: Text.AlignVCenter
-                            text: qsTr("Show Highscores")
-                        }
-                    }
-                }
-
-                RowLayout {
-                    id: quitRow
-
-                    Item {
-                        id: quitItemLeft
-
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-
-                        KeyboardKey {
-                            id: quitKeyIcon
-
-                            anchors.verticalCenter: quitItemLeft.verticalCenter
-
-                            width: 25
-                            height: 25
-
-                            text: qsTr("Q")
-                        }
-                    }
-
-                    Item {
-                        id: quitItemRight
-
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-
-                        Text {
-                            anchors.fill: quitItemRight
-                            verticalAlignment: Text.AlignVCenter
-                            text: qsTr("Quit Game")
-                        }
-                    }
-                }
-            }
+            onClicked: Qt.quit()
         }
     }
-
-//    KeyboardKey {
-//        id: enterButton
-
-//        width: 50
-//        height: 25
-
-//        text: qsTr("↵ Enter")
-//        pixelSize: 11
-//    }
-
-//    KeyboardKey {
-//        id: quitButton
-
-//        width: 25
-//        height: width
-
-//        anchors {
-//            left: welcomeScreen.left
-//            leftMargin: 15
-//            bottom: welcomeScreen.bottom
-//            bottomMargin: 15
-//        }
-
-//        text: qsTr("Q")
-//    }
 }
