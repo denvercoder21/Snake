@@ -17,6 +17,7 @@ public:
         snake,
         fruit
     };
+    Q_ENUM(cell)
 
     board(int width, int height, QObject* parent = nullptr);
 

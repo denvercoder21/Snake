@@ -19,28 +19,14 @@ ApplicationWindow
         Repeater {
             model: BoardModel.rowCount()
 
-            Rectangle {
+            delegate: Rectangle {
                 width: 20
                 height: 20
-                color: getColor(BoardModel.data(BoardModel.index(index, index)))
+                color: BoardModel.data(BoardModel.index(index, index), BoardModel.Color)
 
-                Text {
-                    anchors.fill: parent
-                    text: BoardModel.data(BoardModel.index(index, index))
-                    font.pixelSize: 9
-                }
+                Component.onCompleted: console.log(model)
             }
         }
-    }
-
-    function getColor(index) {
-        if (index === "Empty")
-            return "gold"
-        if (index === BoardModel.Snake)
-            return "lightsteelblue"
-        if (index === BoardModel.Fruit)
-            return "red"
-        return "brown"
     }
 }
 
