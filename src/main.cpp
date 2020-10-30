@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);    auto board_logic = board{definitions::board_width, definitions::board_height};
 
     qRegisterMetaType<position>("position");
+    qmlRegisterUncreatableType<board_viewmodel>("Board.CellState", 1, 0, "CellState", "Foo");
 
     auto board_view = board_viewmodel{board_logic};
 

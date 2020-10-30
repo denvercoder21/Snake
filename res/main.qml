@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 1.0
+import Board.CellState 1.0
 
 ApplicationWindow
 {
@@ -12,6 +13,18 @@ ApplicationWindow
 
     color: "#BECB02"
 
+    function getColor(state) {
+        console.log(state)
+        switch(state) {
+        case CellState.Empty:
+            return "gray"
+        case CellState.Snake:
+            return "black"
+        case CellState.Fruit:
+            return "orange"
+        }
+    }
+
     Grid {
         columns: BoardModel.columnCount()
         spacing: 2
@@ -22,19 +35,19 @@ ApplicationWindow
             delegate: Rectangle {
                 width: 30
                 height: width
-                color: model.color
-
-                Component.onCompleted: console.log(model)
+                color: getColor(model.display)
             }
         }
     }
-
-        Shortcut {
-            sequence: "S"
-            context: Qt.ApplicationShortcut
-            onActivated: Game.start()
-        }
 }
+
+
+
+//    Shortcut {
+//        sequence: "S"
+//        context: Qt.ApplicationShortcut
+//        onActivated: Game.start()
+//    }
 
 //    WelcomeScreen {
 //        id: welcomeScreen
@@ -56,4 +69,3 @@ ApplicationWindow
 //        context: Qt.ApplicationShortcut
 //        onActivated: console.log("show highscore")
 //    }
-//}

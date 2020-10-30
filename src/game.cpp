@@ -3,8 +3,6 @@
 
 #include <algorithm>
 #include <iostream>
-#include <thread>
-#include <chrono>
 
 game::game(board& _board, snake& _snake, QObject* parent) :
     QObject(parent),
@@ -18,17 +16,13 @@ game::game(board& _board, snake& _snake, QObject* parent) :
 
     // set snake elements on the board
     for (const auto& pos : m_snake.elements())
-        m_board.set_state(pos, board::cell::snake);
+        m_board.set_state(pos, board::cell_state::snake);
 
     m_board.generate_fruit();
 }
 
 void game::start() noexcept
 {
-    std::cout << "game started" << std::endl;
-    m_thread = std::thread([this](){
-        this->process();
-    });
 }
 
 void game::process()
@@ -53,19 +47,16 @@ void game::process()
         }
 
         // path is clear, move snake
-        m_board.set_state(next, board::cell::snake);
-        if (m_board.state(next) == board::cell::fruit)
+        m_board.set_state(next, board::cell_state::snake);
+        if (m_board.state(next) == board::cell_state::fruit)
         {
             m_snake.eat();
             m_board.generate_fruit();
         }
         else
         {
-            m_board.set_state(m_snake.tail(), board::cell::empty);
+            m_board.set_state(m_snake.tail(), board::cell_state::empty);
             m_snake.move();
         }
-
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        std::cout << m_board << std::endl;
     }
 }

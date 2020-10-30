@@ -8,7 +8,7 @@ board::board(int width, int height, QObject* parent) :
     QObject(parent),
     m_width(width),
     m_height(height),
-    m_cells(width * height, cell::empty)
+    m_cells(width * height, cell_state::empty)
 {
 }
 
@@ -22,12 +22,12 @@ int board::height() const noexcept
     return m_height;
 }
 
-board::cell board::state(const position& pos) const
+board::cell_state board::state(const position& pos) const
 {
     return state(element_to_index(pos));
 }
 
-board::cell board::state(size_t index) const
+board::cell_state board::state(size_t index) const
 {
     try
     {
@@ -36,11 +36,11 @@ board::cell board::state(size_t index) const
     catch (const std::out_of_range& e)
     {
         std::cout << e.what() << std::endl;
-        return cell::empty;
+        return cell_state::empty;
     }
 }
 
-void board::set_state(const position& pos, board::cell state)
+void board::set_state(const position& pos, board::cell_state state)
 {
     try
     {
@@ -63,17 +63,17 @@ bool board::inside_bounds(const position& pos) const
 
 void board::generate_fruit()
 {
-    auto empty = [](const cell c){
-        return c == cell::empty;
+    auto empty = [](const cell_state c){
+        return c == cell_state::empty;
     };
 
     auto rndm_empty = utils::select_randomly(m_cells | std::views::filter(empty));
-    *rndm_empty = cell::fruit;
+    *rndm_empty = cell_state::fruit;
 }
 
 void board::clear()
 {
-    std::ranges::fill(m_cells, cell::empty);
+    std::ranges::fill(m_cells, cell_state::empty);
 }
 
 size_t board::element_to_index(const position& pos) const
