@@ -20,19 +20,16 @@ public:
 
     board(int width, int height, QObject* parent = nullptr);
 
-    int width() const noexcept;
-    int height() const noexcept;
+    [[nodiscard]] int width() const noexcept;
+    [[nodiscard]] int height() const noexcept;
 
     [[nodiscard]] cell_state state(const position& pos) const;
     [[nodiscard]] cell_state state(size_t index) const;
     void set_state(const position& pos, cell_state state);
 
     [[nodiscard]] bool inside_bounds(const position& pos) const;
-
     void generate_fruit();
     void clear();
-
-    size_t element_to_index(const position& pos) const;
 
     friend std::ostream& operator<<(std::ostream& str, board::cell_state state)
     {
@@ -68,6 +65,8 @@ signals:
     void data_changed(const position&);
 
 private:
+    size_t element_to_index(const position& pos) const;
+
     const int m_width,
               m_height;
 
