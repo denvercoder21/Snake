@@ -17,22 +17,22 @@ void snake::eat()
     push_front(next_element());
 }
 
-element snake::head() const
+position snake::head() const
 {
     return m_snake.front();
 }
 
-element snake::tail() const
+position snake::tail() const
 {
     return m_snake.back();
 }
 
-void snake::push_front(const element &_element)
+void snake::push_front(const position& pos)
 {
-    m_snake.push_front(_element);
+    m_snake.push_front(pos);
 }
 
-std::list<element> snake::elements() const
+std::list<position> snake::elements() const
 {
     return m_snake;
 }
@@ -57,9 +57,9 @@ void snake::set_direction(snake::direction _direction)
     m_direction = _direction;
 }
 
-void snake::push_back(const element &_element)
+void snake::push_back(const position& pos)
 {
-    m_snake.push_back(_element);
+    m_snake.push_back(pos);
 }
 
 void snake::pop_front()
@@ -72,7 +72,7 @@ void snake::pop_back()
     m_snake.pop_back();
 }
 
-element snake::next_element() const
+position snake::next_element() const
 {
     auto _head = head();
 

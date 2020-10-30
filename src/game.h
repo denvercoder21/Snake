@@ -4,6 +4,7 @@
 #include "snake.h"
 
 #include <QObject>
+#include <thread>
 
 class game : public QObject
 {
@@ -20,4 +21,5 @@ private:
     snake& m_snake;
 
     bool m_quit{false};
+    std::thread m_thread;
 };

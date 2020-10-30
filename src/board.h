@@ -24,16 +24,16 @@ public:
     int width() const noexcept;
     int height() const noexcept;
 
-    [[nodiscard]] cell state(const element& _element) const;
+    [[nodiscard]] cell state(const position& pos) const;
     [[nodiscard]] cell state(size_t index) const;
-    void set_state(const element& _element, cell state);
+    void set_state(const position& pos, cell state);
 
-    [[nodiscard]] bool inside_bounds(const element& _element) const;
+    [[nodiscard]] bool inside_bounds(const position& pos) const;
 
     void generate_fruit();
     void clear();
 
-    size_t element_to_index(const element& _element) const;
+    size_t element_to_index(const position& pos) const;
 
     friend std::ostream& operator<<(std::ostream& str, board::cell state)
     {
@@ -66,7 +66,7 @@ public:
     }
 
 signals:
-    void data_changed(const element&);
+    void data_changed(const position&);
 
 private:
     const int m_width,

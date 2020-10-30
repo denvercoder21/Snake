@@ -17,17 +17,23 @@ ApplicationWindow
         spacing: 2
 
         Repeater {
-            model: BoardModel.rowCount()
+            model: BoardModel
 
             delegate: Rectangle {
-                width: 20
-                height: 20
-                color: BoardModel.data(BoardModel.index(index, index), BoardModel.Color)
+                width: 30
+                height: width
+                color: model.color
 
                 Component.onCompleted: console.log(model)
             }
         }
     }
+
+        Shortcut {
+            sequence: "S"
+            context: Qt.ApplicationShortcut
+            onActivated: Game.start()
+        }
 }
 
 //    WelcomeScreen {

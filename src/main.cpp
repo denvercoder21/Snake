@@ -11,7 +11,12 @@
 
 int main(int argc, char *argv[])
 {
-    auto board_logic = board{definitions::board_width, definitions::board_height};
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+    QGuiApplication app(argc, argv);    auto board_logic = board{definitions::board_width, definitions::board_height};
+
+    qRegisterMetaType<position>("position");
+
     auto board_view = board_viewmodel{board_logic};
 
     auto snake_logic = snake{snake::direction::down};
@@ -19,9 +24,6 @@ int main(int argc, char *argv[])
     auto game_logic = game{board_logic, snake_logic};
     auto game_view = game_viewmodel{game_logic};
 
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
-    QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine{};
 
     engine.rootContext()->setContextProperty("Game", &game_view);

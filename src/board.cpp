@@ -2,7 +2,7 @@
 
 #include <algorithm>
 #include <iostream>
-#include <ranges>
+//#include <ranges>
 
 board::board(int width, int height, QObject* parent) :
     QObject(parent),
@@ -22,9 +22,9 @@ int board::height() const noexcept
     return m_height;
 }
 
-board::cell board::state(const element &_element) const
+board::cell board::state(const position& pos) const
 {
-    return state(element_to_index(_element));
+    return state(element_to_index(pos));
 }
 
 board::cell board::state(size_t index) const
@@ -40,12 +40,12 @@ board::cell board::state(size_t index) const
     }
 }
 
-void board::set_state(const element& _element, board::cell state)
+void board::set_state(const position& pos, board::cell state)
 {
     try
     {
-        m_cells.at(element_to_index(_element)) = state;
-        emit data_changed(_element);
+        m_cells.at(element_to_index(pos)) = state;
+        emit data_changed(pos);
     }
     catch (const std::out_of_range& e)
     {
@@ -53,12 +53,12 @@ void board::set_state(const element& _element, board::cell state)
     }
 }
 
-bool board::inside_bounds(const element &_element) const
+bool board::inside_bounds(const position& pos) const
 {
-    return     _element.x >= 0
-            && _element.x < m_width
-            && _element.y >= 0
-            && _element.y < m_height;
+    return     pos.x >= 0
+            && pos.x < m_width
+            && pos.y >= 0
+            && pos.y < m_height;
 }
 
 void board::generate_fruit()
@@ -76,7 +76,7 @@ void board::clear()
     std::ranges::fill(m_cells, cell::empty);
 }
 
-size_t board::element_to_index(const element &_element) const
+size_t board::element_to_index(const position& pos) const
 {
-    return static_cast<size_t>(_element.y * m_width + _element.x);
+    return static_cast<size_t>(pos.y * m_width + pos.x);
 }

@@ -3,13 +3,13 @@
 #include <iterator>
 #include <random>
 
-struct element
+struct position
 {
     int x,
         y;
 };
 
-inline bool operator==(const element& a, const element& b)
+inline bool operator==(const position& a, const position& b)
 {
     return a.x == b.x && a.y == b.y;
 }

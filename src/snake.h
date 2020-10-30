@@ -20,22 +20,22 @@ public:
     void move();
     void eat();
 
-    void push_front(const element& _element);
+    void push_front(const position& pos);
 
-    element tail() const;
-    element next_element() const;
-    std::list<element> elements() const;
+    position tail() const;
+    position next_element() const;
+    std::list<position> elements() const;
 
     void set_direction(direction _direction);
 
 private:
-    element head() const;
+    position head() const;
 
-    void push_back(const element& _element);
+    void push_back(const position& pos);
 
     void pop_front();
     void pop_back();
 
     direction m_direction;
-    std::list<element> m_snake;
+    std::list<position> m_snake;
 };
