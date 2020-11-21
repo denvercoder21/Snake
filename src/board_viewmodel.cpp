@@ -37,5 +37,5 @@ QVariant board_viewmodel::data(const QModelIndex& index, int role) const
     if (role != Qt::DisplayRole)
         return QVariant();
 
-    return QVariant::fromValue(static_cast<CellState>(m_board.state(index.row())));
+    return QVariant::fromValue(static_cast<int>(m_board.state(index.row())));
 }

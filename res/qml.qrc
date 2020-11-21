@@ -5,5 +5,6 @@
         <file>WelcomeScreen.qml</file>
         <file>HighscoreScreen.qml</file>
         <file>GameOverScreen.qml</file>
+        <file>Cell.qml</file>
     </qresource>
 </RCC>

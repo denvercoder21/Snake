@@ -25,7 +25,7 @@ add_executable(snake
 )
 
 target_include_directories(snake
-    PUBLIC
+    PRIVATE
         src/
 )
 

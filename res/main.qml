@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 1.0
+
 import Board.CellState 1.0
 
 ApplicationWindow
@@ -7,47 +8,48 @@ ApplicationWindow
     id: mainWindow
 
     visible: true
-    width: 640
-    height: 480
+    width: board.implicitWidth
+    height: board.implicitHeight
     title: qsTr("Snake")
 
     color: "#BECB02"
 
     function getColor(state) {
-        console.log(state)
         switch(state) {
         case CellState.Empty:
-            return "gray"
+            return "#BACA00"
         case CellState.Snake:
-            return "black"
+            return "#232323"
         case CellState.Fruit:
-            return "orange"
+            return "crimson"
         }
     }
 
     Grid {
+        id: board
+
         columns: BoardModel.columnCount()
         spacing: 2
 
         Repeater {
             model: BoardModel
 
-            delegate: Rectangle {
+            delegate: Cell {
                 width: 30
-                height: width
                 color: getColor(model.display)
             }
         }
+    }
+
+    Shortcut {
+        sequence: "S"
+        context: Qt.ApplicationShortcut
+        onActivated: Game.start()
     }
 }
 
 
 
-//    Shortcut {
-//        sequence: "S"
-//        context: Qt.ApplicationShortcut
-//        onActivated: Game.start()
-//    }
 
 //    WelcomeScreen {
 //        id: welcomeScreen
