@@ -6,6 +6,8 @@
 #include <QObject>
 #include <QThread>
 
+#include <chrono>
+
 class game_processor : public QObject
 {
     Q_OBJECT
@@ -14,6 +16,8 @@ public:
     void process();
 
 private:
+    void sleep(const std::chrono::high_resolution_clock::time_point& start);
+
     board& m_board;
     snake& m_snake;
 

@@ -24,7 +24,7 @@ int board::height() const noexcept
 
 board::cell_state board::state(const position& pos) const
 {
-    return state(element_to_index(pos));
+    return state(position_to_index(pos));
 }
 
 board::cell_state board::state(size_t index) const
@@ -44,8 +44,9 @@ void board::set_state(const position& pos, board::cell_state state)
 {
     try
     {
-        m_cells.at(element_to_index(pos)) = state;
-        emit data_changed(pos);
+        const auto index = position_to_index(pos);
+        m_cells.at(index) = state;
+        emit data_changed(static_cast<int>(index));
     }
     catch (const std::out_of_range& e)
     {
@@ -76,7 +77,7 @@ void board::clear()
     std::ranges::fill(m_cells, cell_state::empty);
 }
 
-size_t board::element_to_index(const position& pos) const
+size_t board::position_to_index(const position& pos) const
 {
     return static_cast<size_t>(pos.y * m_width + pos.x);
 }

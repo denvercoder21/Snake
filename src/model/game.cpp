@@ -2,7 +2,8 @@
 #include "utils.h"
 
 #include <algorithm>
-#include <iostream>
+#include <chrono>
+#include <thread>
 
 game_processor::game_processor(board& _board, snake& _snake, QObject *parent) :
     QObject(parent),
@@ -25,6 +26,8 @@ void game_processor::process()
 {
     while (!m_quit)
     {
+        const auto start = std::chrono::high_resolution_clock::now();
+
         auto next = m_snake.next_element();
 
         // collison with walls
@@ -55,9 +58,18 @@ void game_processor::process()
             m_snake.move();
         }
 
-        std::cout << m_board << std::endl;
-        QThread::msleep(3000);
+        sleep(start);
     }
+}
+
+void game_processor::sleep(const std::chrono::high_resolution_clock::time_point& start)
+{
+    using namespace std::chrono;
+
+    const auto end = high_resolution_clock::now();
+    const auto time_passed = duration_cast<nanoseconds>(end - start);
+    const auto time_sleep = duration_cast<nanoseconds>(duration_cast<nanoseconds>(definitions::timestep) - time_passed);
+    std::this_thread::sleep_for(nanoseconds(time_sleep));
 }
 
 game::game(board& _board, snake& _snake, QObject* parent) :

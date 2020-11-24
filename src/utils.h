@@ -1,5 +1,6 @@
 #pragma once
 
+#include <chrono>
 #include <iterator>
 #include <random>
 
@@ -20,6 +21,9 @@ namespace definitions
 constexpr int number_snake_elements{6};
 constexpr int board_width{20};
 constexpr int board_height{13};
+
+using namespace std::chrono_literals;
+constexpr auto timestep = 500ms;
 
 } // definitions
 

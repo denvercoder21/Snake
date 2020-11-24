@@ -62,10 +62,10 @@ public:
     }
 
 signals:
-    void data_changed(const position&);
+    void data_changed(int);
 
 private:
-    size_t element_to_index(const position& pos) const;
+    size_t position_to_index(const position& pos) const;
 
     const int m_width,
               m_height;
