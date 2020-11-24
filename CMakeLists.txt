@@ -18,6 +18,7 @@ add_executable(snake
     src/board.cpp
     src/board_viewmodel.cpp
     src/game.cpp
+    src/game_thread.cpp
     src/game_viewmodel.cpp
     src/snake.cpp
 

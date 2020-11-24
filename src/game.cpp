@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <iostream>
 
-game::game(board& _board, snake& _snake, QObject* parent) :
+game_processor::game_processor(board& _board, snake& _snake, QObject *parent) :
     QObject(parent),
     m_board(_board),
     m_snake(_snake)
@@ -21,11 +21,7 @@ game::game(board& _board, snake& _snake, QObject* parent) :
     m_board.generate_fruit();
 }
 
-void game::start() noexcept
-{
-}
-
-void game::process()
+void game_processor::process()
 {
     while (!m_quit)
     {
@@ -58,5 +54,29 @@ void game::process()
             m_board.set_state(m_snake.tail(), board::cell_state::empty);
             m_snake.move();
         }
+
+        std::cout << m_board << std::endl;
+        QThread::msleep(3000);
     }
 }
+
+game::game(board& _board, snake& _snake, QObject* parent) :
+    QObject(parent),
+    m_processor(_board, _snake)
+{
+    m_processor.moveToThread(&m_game_thread);
+    connect(&m_game_thread, &QThread::started, &m_processor, &game_processor::process);
+    connect(&m_game_thread, &QThread::finished, &m_processor, &QObject::deleteLater);
+}
+
+game::~game()
+{
+    m_game_thread.quit();
+    m_game_thread.wait();
+}
+
+void game::start() noexcept
+{
+    m_game_thread.start();
+}
+
