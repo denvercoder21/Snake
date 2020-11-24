@@ -1,6 +1,6 @@
 #pragma once
 
-#include "board.h"
+#include "model/board.h"
 
 #include <QAbstractListModel>
 

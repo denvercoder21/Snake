@@ -1,8 +1,8 @@
-#include "board.h"
-#include "board_viewmodel.h"
-#include "game.h"
-#include "game_viewmodel.h"
-#include "snake.h"
+#include "model/board.h"
+#include "model/game.h"
+#include "model/snake.h"
+#include "viewmodel/board_viewmodel.h"
+#include "viewmodel/game_viewmodel.h"
 #include "utils.h"
 
 #include <QGuiApplication>

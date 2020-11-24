@@ -15,12 +15,11 @@ set(CMAKE_AUTORCC ON)
 
 add_executable(snake
     src/main.cpp
-    src/board.cpp
-    src/board_viewmodel.cpp
-    src/game.cpp
-    src/game_thread.cpp
-    src/game_viewmodel.cpp
-    src/snake.cpp
+    src/model/board.cpp
+    src/model/game.cpp
+    src/model/snake.cpp
+    src/viewmodel/board_viewmodel.cpp
+    src/viewmodel/game_viewmodel.cpp
 
     res/qml.qrc
 )
