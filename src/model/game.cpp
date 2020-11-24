@@ -12,7 +12,7 @@ game_processor::game_processor(board& _board, snake& _snake, QObject *parent) :
 {
     // initialize snake
     for (int i = 0; i < definitions::number_snake_elements; ++i)
-        m_snake.push_front({i+2, 1});
+        m_snake.push_front({i + 2, 1});
     m_snake.move();
 
     // set snake elements on the board
@@ -73,12 +73,13 @@ void game_processor::sleep(const std::chrono::high_resolution_clock::time_point&
 }
 
 game::game(board& _board, snake& _snake, QObject* parent) :
-    QObject(parent),
-    m_processor(_board, _snake)
+    QObject(parent)
 {
-    m_processor.moveToThread(&m_game_thread);
-    connect(&m_game_thread, &QThread::started, &m_processor, &game_processor::process);
-    connect(&m_game_thread, &QThread::finished, &m_processor, &QObject::deleteLater);
+    auto processor = new game_processor(_board, _snake);
+    processor->moveToThread(&m_game_thread);
+
+    connect(&m_game_thread, &QThread::started, processor, &game_processor::process);
+    connect(&m_game_thread, &QThread::finished, processor, &QObject::deleteLater);
 }
 
 game::~game()

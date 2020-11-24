@@ -34,7 +34,6 @@ public:
     Q_INVOKABLE void start() noexcept;
 
 private:
-    game_processor m_processor;
     QThread m_game_thread;
 };
 
