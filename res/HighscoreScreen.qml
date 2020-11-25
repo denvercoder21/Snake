@@ -6,7 +6,7 @@ import QtGraphicalEffects 1.0
 Rectangle {
     id: root
 
-    signal startmenuClicked
+    signal backClicked
 
     radius: 15
 
@@ -53,16 +53,16 @@ Rectangle {
         }
 
         RoundButton {
-            id: startmenuButton
+            id: backButton
 
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
 
             radius: 10
 
-            text: qsTr("Startmenu")
+            text: qsTr("Back")
 
-            onClicked: startmenuClicked()
+            onClicked: backClicked()
         }
     }
 }

@@ -46,7 +46,6 @@ void game_processor::process()
         }
 
         // path is clear, move snake
-        m_board.set_state(next, board::cell_state::snake);
         if (m_board.state(next) == board::cell_state::fruit)
         {
             m_snake.eat();
@@ -57,6 +56,7 @@ void game_processor::process()
             m_board.set_state(m_snake.tail(), board::cell_state::empty);
             m_snake.move();
         }
+        m_board.set_state(next, board::cell_state::snake);
 
         sleep(start);
     }

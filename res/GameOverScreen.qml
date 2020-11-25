@@ -6,8 +6,7 @@ import QtGraphicalEffects 1.0
 Rectangle {
     id: root
 
-    signal restartClicked
-    signal highscoreClicked
+    signal startmenuClicked
 
     radius: 15
 
@@ -54,29 +53,16 @@ Rectangle {
         }
 
         RoundButton {
-            id: restartButton
+            id: startmenuButton
 
             Layout.alignment: Qt.AlignTop
             Layout.fillWidth: true
 
             radius: 10
 
-            text: qsTr("Restart Game")
+            text: qsTr("Startmenu")
 
-            onClicked: restartClicked()
-        }
-
-        RoundButton {
-            id: highscoreButton
-
-            Layout.alignment: Qt.AlignTop
-            Layout.fillWidth: true
-
-            radius: 10
-
-            text: qsTr("Highscore")
-
-            onClicked: highscoreClicked()
+            onClicked: startmenuClicked()
         }
     }
 }
