@@ -14,60 +14,75 @@ ApplicationWindow
 
     color: "#BECB02"
 
-    function getColor(state) {
-        switch(state) {
-        case CellState.Empty:
-            return "#BACA00"
-        case CellState.Snake:
-            return "#232323"
-        case CellState.Fruit:
-            return "crimson"
-        }
-    }
-
-    Grid {
+    Board {
         id: board
-
-        columns: BoardModel.columnCount()
-        spacing: 2
-
-        Repeater {
-            model: BoardModel
-
-            delegate: Cell {
-                width: 30
-                color: getColor(model.display)
-            }
-        }
     }
 
-    Shortcut {
-        sequence: "S"
-        context: Qt.ApplicationShortcut
-        onActivated: Game.start()
+    WelcomeScreen {
+        id: welcomeScreen
+
+        width: 450
+        height: 350
+
+        anchors.centerIn: parent
+
+        onStartClicked: states.state = "game"
+        onHighscoreClicked: states.state = "highscore"
+        onHelpClicked: states.state = "help"
+    }
+
+    GameOverScreen {
+        id: gameOverScreen
+
+        width: 450
+        height: 350
+
+        anchors.centerIn: parent
+    }
+
+    HighscoreScreen {
+        id: highscoreScreen
+
+        width: 450
+        height: 350
+
+        anchors.centerIn: parent
+    }
+
+    HelpScreen {
+        id: helpScreen
+
+        width: 450
+        height: 350
+
+        anchors.centerIn: parent
+    }
+
+    Item {
+        id: states
+
+        state: "welcome"
+
+        states: [
+            State {
+                name: "welcome"
+                PropertyChanges { target: welcomeScreen; visible: true }
+            },
+            State {
+                name: "game"
+            },
+            State {
+                name: "gameOver"
+                PropertyChanges { target: gameOverScreen; visible: true }
+            },
+            State {
+                name: "highscore"
+                PropertyChanges { target: highscoreScreen; visible: true }
+            },
+            State {
+                name: "help"
+                PropertyChanges { target: helpScreen; visible: true }
+            }
+        ]
     }
 }
-
-
-
-
-//    WelcomeScreen {
-//        id: welcomeScreen
-
-//        width: 450
-//        height: 350
-
-//        anchors.centerIn: parent
-//    }
-
-//    Shortcut {
-//        sequence: "Q"
-//        context: Qt.ApplicationShortcut
-//        onActivated: Qt.quit()
-//    }
-
-//    Shortcut {
-//        sequence: "H"
-//        context: Qt.ApplicationShortcut
-//        onActivated: console.log("show highscore")
-//    }

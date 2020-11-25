@@ -5,9 +5,16 @@ import QtGraphicalEffects 1.0
 
 Rectangle {
     id: root
+
+    signal startClicked
+    signal highscoreClicked
+    signal helpClicked
+
     radius: 15
 
     color: "white"
+
+    visible: false
 
     layer.enabled: true
     layer.effect: DropShadow {
@@ -72,7 +79,7 @@ Rectangle {
 
             text: qsTr("Start Game")
 
-            onClicked: Game.start()
+            onClicked: startClicked()
         }
 
         RoundButton {
@@ -84,6 +91,8 @@ Rectangle {
             radius: 10
 
             text: qsTr("Highscore")
+
+            onClicked: highscoreClicked()
         }
 
         RoundButton {
@@ -95,6 +104,8 @@ Rectangle {
             radius: 10
 
             text: qsTr("Help")
+
+            onClicked: helpClicked()
         }
 
         RoundButton {

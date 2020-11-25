@@ -20,6 +20,6 @@ Rectangle {
 
     Text {
         anchors.centerIn: parent
-        text: qsTr("Highscores")
+        text: qsTr("Help")
     }
 }
