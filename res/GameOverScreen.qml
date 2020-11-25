@@ -5,6 +5,10 @@ import QtGraphicalEffects 1.0
 
 Rectangle {
     id: root
+
+    signal restartClicked
+    signal highscoreClicked
+
     radius: 15
 
     color: "white"
@@ -18,8 +22,61 @@ Rectangle {
         samples: 32
     }
 
-    Text {
-        anchors.centerIn: parent
-        text: qsTr("Game Over")
+    ColumnLayout {
+        id: layout
+
+        anchors {
+            fill: root
+            margins: 20
+        }
+
+        spacing: 12
+
+        Text {
+            id: headline
+
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+
+            horizontalAlignment: Qt.AlignHCenter
+
+            text: qsTr("Game Over")
+            font {
+                pixelSize: 30
+            }
+        }
+
+        Item {
+            id: dummy
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
+
+        RoundButton {
+            id: restartButton
+
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+
+            radius: 10
+
+            text: qsTr("Restart Game")
+
+            onClicked: restartClicked()
+        }
+
+        RoundButton {
+            id: highscoreButton
+
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+
+            radius: 10
+
+            text: qsTr("Highscore")
+
+            onClicked: highscoreClicked()
+        }
     }
 }

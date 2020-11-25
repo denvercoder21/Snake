@@ -14,6 +14,10 @@ class game_processor : public QObject
 public:
     explicit game_processor(board& _board, snake& _snake, QObject *parent = nullptr);
     void process();
+    void stop();
+
+signals:
+    void game_over();
 
 private:
     void sleep(const std::chrono::high_resolution_clock::time_point& start);
@@ -24,6 +28,8 @@ private:
     bool m_quit{false};
 };
 
+//----------------------------------------------------------------------------------------------------------------------
+
 class game : public QObject
 {
     Q_OBJECT
@@ -33,7 +39,11 @@ public:
 
     Q_INVOKABLE void start() noexcept;
 
+signals:
+    void gameOver();
+
 private:
+    game_processor* m_processor;
     QThread m_game_thread;
 };
 

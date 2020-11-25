@@ -79,7 +79,10 @@ Rectangle {
 
             text: qsTr("Start Game")
 
-            onClicked: startClicked()
+            onClicked: {
+                startClicked()
+                Game.start()
+            }
         }
 
         RoundButton {

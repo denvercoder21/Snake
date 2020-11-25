@@ -38,6 +38,9 @@ ApplicationWindow
         height: 350
 
         anchors.centerIn: parent
+
+        onRestartClicked: states.state = "game"
+        onHighscoreClicked: states.state = "highscore"
     }
 
     HighscoreScreen {
@@ -47,6 +50,8 @@ ApplicationWindow
         height: 350
 
         anchors.centerIn: parent
+
+        onStartmenuClicked: states.state = "welcome"
     }
 
     HelpScreen {
@@ -56,6 +61,8 @@ ApplicationWindow
         height: 350
 
         anchors.centerIn: parent
+
+        onBackClicked: states.state = "welcome"
     }
 
     Item {
@@ -84,5 +91,17 @@ ApplicationWindow
                 PropertyChanges { target: helpScreen; visible: true }
             }
         ]
+    }
+
+    Shortcut {
+         sequence: "S"
+         context: Qt.ApplicationShortcut
+
+         onActivated: Game.start()
+     }
+
+    Connections {
+        target: Game
+        function onGameOver() { states.state = "gameOver" }
     }
 }

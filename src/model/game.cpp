@@ -60,6 +60,13 @@ void game_processor::process()
 
         sleep(start);
     }
+
+    emit game_over();
+}
+
+void game_processor::stop()
+{
+    m_quit = true;
 }
 
 void game_processor::sleep(const std::chrono::high_resolution_clock::time_point& start)
@@ -72,18 +79,23 @@ void game_processor::sleep(const std::chrono::high_resolution_clock::time_point&
     std::this_thread::sleep_for(nanoseconds(time_sleep));
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+
 game::game(board& _board, snake& _snake, QObject* parent) :
     QObject(parent)
 {
-    auto processor = new game_processor(_board, _snake);
-    processor->moveToThread(&m_game_thread);
+    m_processor = new game_processor(_board, _snake);
+    m_processor->moveToThread(&m_game_thread);
 
-    connect(&m_game_thread, &QThread::started, processor, &game_processor::process);
-    connect(&m_game_thread, &QThread::finished, processor, &QObject::deleteLater);
+    connect(&m_game_thread, &QThread::started, m_processor, &game_processor::process);
+    connect(&m_game_thread, &QThread::finished, m_processor, &QObject::deleteLater);
+
+    connect(m_processor, &game_processor::game_over, this, &game::gameOver);
 }
 
 game::~game()
 {
+    m_processor->stop();
     m_game_thread.quit();
     m_game_thread.wait();
 }

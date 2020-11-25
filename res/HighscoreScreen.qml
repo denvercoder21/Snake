@@ -5,6 +5,9 @@ import QtGraphicalEffects 1.0
 
 Rectangle {
     id: root
+
+    signal startmenuClicked
+
     radius: 15
 
     color: "white"
@@ -18,8 +21,48 @@ Rectangle {
         samples: 32
     }
 
-    Text {
-        anchors.centerIn: parent
-        text: qsTr("Highscores")
+    ColumnLayout {
+        id: layout
+
+        anchors {
+            fill: root
+            margins: 20
+        }
+
+        spacing: 12
+
+        Text {
+            id: headline
+
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+
+            horizontalAlignment: Qt.AlignHCenter
+
+            text: qsTr("Highscores")
+            font {
+                pixelSize: 30
+            }
+        }
+
+        Item {
+            id: dummy
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
+
+        RoundButton {
+            id: startmenuButton
+
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+
+            radius: 10
+
+            text: qsTr("Startmenu")
+
+            onClicked: startmenuClicked()
+        }
     }
 }
