@@ -57,6 +57,11 @@ void snake::set_direction(snake::direction _direction)
     m_direction = _direction;
 }
 
+void snake::clear()
+{
+    m_snake.clear();
+}
+
 void snake::push_back(const position& pos)
 {
     m_snake.push_back(pos);

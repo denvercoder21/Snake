@@ -93,7 +93,7 @@ ApplicationWindow
 
         Connections {
             target: Game
-            onGameOver: states.state = "gameOver"
+            function onGameOver() { states.state = "gameOver" }
         }
     }
 }

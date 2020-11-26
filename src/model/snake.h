@@ -28,6 +28,8 @@ public:
 
     void set_direction(direction _direction);
 
+    void clear();
+
 private:
     position head() const;
 

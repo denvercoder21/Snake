@@ -21,6 +21,8 @@ signals:
 
 private:
     void sleep(const std::chrono::high_resolution_clock::time_point& start);
+    void reset_game();
+    void initialize_snake();
 
     board& m_board;
     snake& m_snake;

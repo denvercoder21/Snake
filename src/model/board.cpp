@@ -75,6 +75,7 @@ void board::generate_fruit()
 void board::clear()
 {
     std::ranges::fill(m_cells, cell_state::empty);
+    emit data_changed(position_to_index({width(), height()}));
 }
 
 size_t board::position_to_index(const position& pos) const
