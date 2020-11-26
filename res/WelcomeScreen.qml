@@ -9,6 +9,7 @@ Rectangle {
     signal startClicked
     signal highscoreClicked
     signal helpClicked
+    signal quitClicked
 
     radius: 15
 
@@ -121,7 +122,7 @@ Rectangle {
 
             text: qsTr("Quit")
 
-            onClicked: Qt.quit()
+            onClicked: quitClicked()
         }
     }
 }

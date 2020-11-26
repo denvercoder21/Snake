@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 1.0
 
 import Board.CellState 1.0
+import Snake.Direction 1.0
 
 ApplicationWindow
 {
@@ -16,6 +17,12 @@ ApplicationWindow
 
     Board {
         id: board
+
+        Keys.enabled: focus
+        Keys.onLeftPressed: Snake.setDirection(Direction.Left)
+        Keys.onRightPressed: Snake.setDirection(Direction.Right)
+        Keys.onUpPressed: Snake.setDirection(Direction.Up)
+        Keys.onDownPressed: Snake.setDirection(Direction.Down)
     }
 
     WelcomeScreen {
@@ -29,6 +36,7 @@ ApplicationWindow
         onStartClicked: states.state = "game"
         onHighscoreClicked: states.state = "highscore"
         onHelpClicked: states.state = "help"
+        onQuitClicked: Qt.quit()
     }
 
     GameOverScreen {
@@ -76,6 +84,7 @@ ApplicationWindow
             },
             State {
                 name: "game"
+                PropertyChanges { target: board; focus: true }
             },
             State {
                 name: "gameOver"
