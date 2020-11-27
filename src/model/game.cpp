@@ -40,14 +40,15 @@ void game_processor::process()
         if (m_board.state(next) == board::cell_state::fruit)
         {
             m_snake.eat();
+            m_board.set_state(next, board::cell_state::snake);
             m_board.generate_fruit();
         }
         else
         {
-            m_board.set_state(m_snake.tail(), board::cell_state::empty);
             m_snake.move();
+            m_board.set_state(m_snake.tail(), board::cell_state::empty);
+            m_board.set_state(next, board::cell_state::snake);
         }
-        m_board.set_state(next, board::cell_state::snake);
 
         sleep(start);
     }
