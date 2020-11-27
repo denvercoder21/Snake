@@ -70,6 +70,7 @@ void board::generate_fruit()
 
     auto rndm_empty = utils::select_randomly(m_cells | std::views::filter(empty));
     *rndm_empty = cell_state::fruit;
+    emit data_changed(position_to_index({width(), height()}));
 }
 
 void board::clear()
