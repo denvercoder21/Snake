@@ -4,7 +4,6 @@
 
 #include <QObject>
 
-#include <iostream>
 #include <vector>
 
 class board : public QObject
@@ -30,36 +29,6 @@ public:
     [[nodiscard]] bool inside_bounds(const position& pos) const;
     void generate_fruit();
     void clear();
-
-    friend std::ostream& operator<<(std::ostream& str, board::cell_state state)
-    {
-        switch (state)
-        {
-        [[likely]]
-        case board::cell_state::empty:
-            str << " - ";
-            break;
-        case board::cell_state::snake:
-            str << " # ";
-            break;
-        [[unlikely]]
-        case board::cell_state::fruit:
-            str << " o ";
-            break;
-        }
-        return str;
-    }
-
-    friend std::ostream& operator<<(std::ostream& str, const board& b)
-    {
-        for (int i = 0; i < b.m_height; ++i)
-        {
-            for (int j = 0; j < b.m_width; ++j)
-                str << b.state({j, i});
-            str << "\n";
-        }
-        return str;
-    }
 
 signals:
     void data_changed(int);

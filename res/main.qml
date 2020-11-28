@@ -33,7 +33,10 @@ ApplicationWindow
 
         anchors.centerIn: parent
 
-        onStartClicked: states.state = "game"
+        onStartClicked: {
+            states.state = "game"
+            Game.start()
+        }
         onHighscoreClicked: states.state = "highscore"
         onHelpClicked: states.state = "help"
         onQuitClicked: Qt.quit()

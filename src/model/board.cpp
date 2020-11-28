@@ -2,7 +2,7 @@
 
 #include <algorithm>
 #include <iostream>
-//#include <ranges>
+#include <ranges>
 
 board::board(int width, int height, QObject* parent) :
     QObject(parent),

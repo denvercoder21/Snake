@@ -82,7 +82,6 @@ Rectangle {
 
             onClicked: {
                 startClicked()
-                Game.start()
             }
         }
 
