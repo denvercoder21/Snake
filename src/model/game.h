@@ -39,9 +39,8 @@ public:
     explicit game(board& _board, snake& _snake, QObject *parent = nullptr);
     ~game();
 
-    Q_INVOKABLE void start() noexcept;
-
 signals:
+    void start();
     void gameOver();
 
 private:

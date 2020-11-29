@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<snake_viewmodel>("Snake.Direction", 1, 0, "Direction", "Direction a snake can head in");
 
     auto board_logic = board{definitions::board_width, definitions::board_height};
-    auto snake_logic = snake{snake::direction::down};
+    auto snake_logic = snake{snake::direction::right};
     auto game_logic = game{board_logic, snake_logic};
 
     auto board_view = board_viewmodel{board_logic};
