@@ -11,6 +11,13 @@ ApplicationWindow
     visible: true
     width: board.implicitWidth
     height: board.implicitHeight
+
+    minimumWidth: width
+    minimumHeight: height
+
+    maximumWidth: width
+    maximumHeight: height
+
     title: qsTr("Snake")
 
     color: "#BECB02"
