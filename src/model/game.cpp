@@ -2,7 +2,6 @@
 #include "utils.h"
 
 #include <algorithm>
-#include <chrono>
 #include <thread>
 
 game_processor::game_processor(board& _board, snake& _snake, QObject *parent) :

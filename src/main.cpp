@@ -17,7 +17,6 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    qRegisterMetaType<position>("position");
     qmlRegisterUncreatableType<board_viewmodel>("Board.CellState", 1, 0, "CellState", "State a cell in the game board is in");
     qmlRegisterUncreatableType<snake_viewmodel>("Snake.Direction", 1, 0, "Direction", "Direction a snake can head in");
 
